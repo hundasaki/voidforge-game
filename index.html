@@ -245,45 +245,36 @@
         // Draw player
         function drawPlayer() {
             ctx.fillStyle = '#00ff88';
-            ctx.shadowColor = '#00ff88';
-            ctx.shadowBlur = 10;
             ctx.fillRect(player.x, player.y, player.width, player.height);
             
             // Draw cannon
             ctx.fillStyle = '#00ff88';
             ctx.fillRect(player.x + player.width / 2 - 3, player.y - 10, 6, 10);
-            ctx.shadowBlur = 0;
         }
 
         // Draw bullets
         function drawBullets() {
             ctx.fillStyle = '#ffff00';
-            ctx.shadowColor = '#ffff00';
-            ctx.shadowBlur = 8;
             for (let bullet of bullets) {
                 ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
             }
-            ctx.shadowBlur = 0;
         }
 
         // Draw enemies
         function drawEnemies() {
             ctx.fillStyle = '#ff0066';
-            ctx.shadowColor = '#ff0066';
-            ctx.shadowBlur = 10;
             for (let enemy of enemies) {
                 ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
             }
-            ctx.shadowBlur = 0;
         }
 
-        // Draw stars background
+        // Draw stars background (optimized - only draw once on canvas)
         function drawStars() {
-            ctx.fillStyle = '#666';
-            for (let i = 0; i < 50; i++) {
-                const x = (i * 50) % canvas.width;
-                const y = (i * 30) % canvas.height;
-                ctx.fillRect(x, y, 1, 1);
+            ctx.fillStyle = '#333';
+            for (let i = 0; i < 20; i++) {
+                const x = (i * 80) % canvas.width;
+                const y = (i * 60) % canvas.height;
+                ctx.fillRect(x, y, 2, 2);
             }
         }
 
@@ -301,8 +292,6 @@
             ctx.fillStyle = '#ff0066';
             ctx.font = 'bold 48px monospace';
             ctx.textAlign = 'center';
-            ctx.shadowColor = '#ff0066';
-            ctx.shadowBlur = 15;
             ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2);
             ctx.font = 'bold 32px monospace';
             ctx.fillText(`Final Score: ${score}`, canvas.width / 2, canvas.height / 2 + 60);
