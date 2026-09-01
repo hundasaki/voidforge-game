@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Void Forge - Game</title>
     <style>
         * {
@@ -10,53 +10,61 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        /* Use a robust monospace stack */
         body {
             background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
             color: #00ff88;
-            font-family: 'Courier New', monospace;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            /* allow scrolling on small viewports instead of hiding overflow */
+            overflow: auto;
+            padding: 20px;
         }
-        
+
         .container {
             text-align: center;
             padding: 40px;
             border: 2px solid #00ff88;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-            background: rgba(10, 14, 39, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.25);
+            background: rgba(10, 14, 39, 0.85);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             max-width: 600px;
+            width: 100%;
         }
-        
+
         h1 {
             font-size: 3em;
             margin-bottom: 20px;
             text-shadow: 0 0 10px #00ff88;
             animation: glow 2s ease-in-out infinite;
         }
-        
+
         p {
             font-size: 1.2em;
             margin: 15px 0;
-            opacity: 0.9;
+            opacity: 0.95;
         }
-        
+
         .status {
             margin-top: 30px;
             padding: 20px;
-            background: rgba(0, 255, 136, 0.1);
+            background: rgba(0, 255, 136, 0.08);
             border-left: 4px solid #00ff88;
+            text-align: left;
         }
-        
+
         .status-text {
-            font-size: 0.9em;
-            color: #00ff88;
+            font-size: 0.95em;
+            color: #c9ffd9; /* slightly lighter for contrast */
+            line-height: 1.4;
         }
-        
+
         @keyframes glow {
             0%, 100% {
                 text-shadow: 0 0 10px #00ff88;
@@ -65,15 +73,36 @@
                 text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88;
             }
         }
+
+        /* Respect user's reduced-motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            h1 {
+                animation: none;
+            }
+        }
+
+        /* Responsive tweaks for small screens */
+        @media (max-width: 420px) {
+            h1 {
+                font-size: 2em;
+                margin-bottom: 12px;
+            }
+            .container {
+                padding: 24px;
+            }
+            p {
+                font-size: 1em;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" role="main">
         <h1>⚡ VOID FORGE ⚡</h1>
         <p>Welcome to the Void Forge Game</p>
         <p>Your epic adventure awaits...</p>
-        
-        <div class="status">
+
+        <div class="status" aria-live="polite">
             <p class="status-text">🎮 Game Engine Loading...</p>
             <p class="status-text">Status: Ready to Deploy</p>
         </div>
